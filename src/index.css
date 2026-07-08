@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@layer base {
+  body,
+  html {
+    @apply w-full h-full bg-[#161E2B] overflow-hidden;
+  }
+  #root {
+    @apply w-full h-full overflow-hidden;
+  }
+}
