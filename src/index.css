@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@layer theme {
+  --color-primary: #1e90ff;
+  --color-secondary: #ff6347;
+  --color-accent: #32cd32;
+  --color-background: #f5f5f5;
+  --color-white: #ffffff;
+}
+
 @layer base {
   body,
   html {
@@ -7,5 +15,20 @@
   }
   #root {
     @apply w-full h-full overflow-hidden;
+  }
+  select,
+  input,
+  textarea {
+    @apply border border-[#8F98A8] p-2 rounded outline-none bg-[#090D26] placeholder:text-[#596176] text-[#596176];
+  }
+  option {
+    @apply text-white font-bold text-base;
+  }
+  textarea {
+    @apply resize-none;
+  }
+  th,
+  td {
+    @apply text-nowrap p-2 border border-white;
   }
 }

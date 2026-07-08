@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const employeeSlice = createSlice({
     name: 'employee',
     initialState: {
-        employees: ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown'],
+        employees: ['Nowaz Mia', 'Noyon', 'Alice Johnson', 'Bob Brown'],
     },
 })
 

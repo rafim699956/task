@@ -2,10 +2,16 @@
 import tabReducer from './features/tab/tabSlice.js'
 import { configureStore } from '@reduxjs/toolkit'
 import employeeReducer from './features/employee/employeeSlice.js'
+import taskPriorityReducer from './features/taskPriority/taskPrioritySlice.js'
+import repetTaskReducer from './features/repetTask/repetTaskSlice.js'
+import taskListReducer from './features/tasklist/tasklistSlice.js'
 
 export default configureStore({
     reducer: {
         tab: tabReducer,
-        employee: employeeReducer
+        employee: employeeReducer,
+        taskPriority: taskPriorityReducer,
+        repetTask: repetTaskReducer,
+        taskList: taskListReducer,
     }
 })
