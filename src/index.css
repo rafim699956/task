@@ -1,17 +1,26 @@
 @import "tailwindcss";
 
 @layer theme {
-  --color-primary: #1e90ff;
-  --color-secondary: #ff6347;
-  --color-accent: #32cd32;
-  --color-background: #f5f5f5;
-  --color-white: #ffffff;
+  :root {
+    --color-primary: #1e90ff;
+    --color-secondary: #ff6347;
+    --color-accent: #32cd32;
+    --color-background: #f5f5f5;
+    --color-white: #ffffff;
+  }
+  .dark {
+    --color-primary: #1e90ff;
+    --color-secondary: #ff6347;
+    --color-accent: #32cd32;
+    --color-background: #161e2b;
+    --color-white: #ffffff;
+  }
 }
 
 @layer base {
   body,
   html {
-    @apply w-full h-full bg-[#161E2B] overflow-hidden;
+    @apply w-full h-full bg-[#161E2B] dark:bg-white overflow-hidden;
   }
   #root {
     @apply w-full h-full overflow-hidden;

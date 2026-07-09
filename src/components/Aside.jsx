@@ -5,7 +5,7 @@ const Aside = () => {
   const { tabs, activeTab } = useSelector((state) => state.tab);
   const dispatch = useDispatch();
   return (
-    <aside className="bg-[#2A3B4D] h-full max-w-75 w-full shrink-0 px-5 py-10">
+    <aside className="bg-[#2A3B4D] dark:bg-black h-full max-w-75 w-full shrink-0 px-5 py-10">
       <h3 className="text-2xl font-semibold text-white mb-4">Task</h3>
       <ul className="pl-2">
         {tabs.map((tab) => (
