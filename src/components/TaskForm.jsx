@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewTask } from "../../app/features/tasklist/tasklistSlice";
 
 const TaskForm = () => {
   const { employees } = useSelector((state) => state.employee);
   const taskPriorities = useSelector((state) => state.taskPriority);
   const repetTasks = useSelector((state) => state.repetTask);
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     employee: "",
     date: "",
-    priority: "",
+    taskPriority: "",
     repeatTask: "",
-    description: "",
+    taskContent: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -40,14 +42,14 @@ const TaskForm = () => {
     if (!formData.date) {
       newErrors.date = "Please select a date";
     }
-    if (!formData.priority) {
-      newErrors.priority = "Please select a priority";
+    if (!formData.taskPriority) {
+      newErrors.taskPriority = "Please select a taskPriority";
     }
     if (!formData.repeatTask) {
       newErrors.repeatTask = "Please select a repeat task";
     }
-    if (!formData.description.trim()) {
-      newErrors.description = "Please enter task description";
+    if (!formData.taskContent.trim()) {
+      newErrors.taskContent = "Please enter task taskContent";
     }
 
     setErrors(newErrors);
@@ -58,6 +60,7 @@ const TaskForm = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Form Data:", formData);
+      dispatch(addNewTask(formData));
     } else {
       console.log("Validation errors:", errors);
     }
@@ -104,27 +107,27 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="priority" className="text-white text-lg font-semibold">
-          Task Priority <span className="text-red-500">*</span>
+        <label htmlFor="taskPriority" className="text-white text-lg font-semibold">
+          Task taskPriority <span className="text-red-500">*</span>
         </label>
         <select
-          id="priority"
-          name="priority"
-          value={formData.priority}
+          id="taskPriority"
+          name="taskPriority"
+          value={formData.taskPriority}
           onChange={handleChange}
-          className={`border ${errors.priority ? "border-red-500" : "border-gray-300"} rounded p-2`}
+          className={`border ${errors.taskPriority ? "border-red-500" : "border-gray-300"} rounded p-2`}
         >
           <option value="">
-            Select Priority ({taskPriorities.join(", ")})
+            Select taskPriority ({taskPriorities.join(", ")})
           </option>
-          {taskPriorities.map((priority) => (
-            <option key={priority} value={priority}>
-              {priority}
+          {taskPriorities.map((taskPriority) => (
+            <option key={taskPriority} value={taskPriority}>
+              {taskPriority}
             </option>
           ))}
         </select>
-        {errors.priority && (
-          <p className="text-red-500 text-sm">{errors.priority}</p>
+        {errors.taskPriority && (
+          <p className="text-red-500 text-sm">{errors.taskPriority}</p>
         )}
       </div>
 
@@ -156,21 +159,21 @@ const TaskForm = () => {
 
       <div className="flex flex-col gap-2 col-span-2">
         <label
-          htmlFor="description"
+          htmlFor="taskContent"
           className="text-white text-lg font-semibold"
         >
           Enter Task <span className="text-red-500">*</span>
         </label>
         <textarea
-          id="description"
-          name="description"
-          value={formData.description}
+          id="taskContent"
+          name="taskContent"
+          value={formData.taskContent}
           onChange={handleChange}
           placeholder="Enter Task"
-          className={`border ${errors.description ? "border-red-500" : "border-gray-300"} rounded p-2 min-h-25`}
+          className={`border ${errors.taskContent ? "border-red-500" : "border-gray-300"} rounded p-2 min-h-25`}
         />
-        {errors.description && (
-          <p className="text-red-500 text-sm">{errors.description}</p>
+        {errors.taskContent && (
+          <p className="text-red-500 text-sm">{errors.taskContent}</p>
         )}
       </div>
 
