@@ -101,6 +101,7 @@ const TaskForm = () => {
           name="date"
           value={formData.date}
           onChange={handleChange}
+          onClick={(e) => e.target.showPicker()}
           className={`border ${errors.date ? "border-red-500" : "border-gray-300"} rounded p-2`}
         />
         {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}

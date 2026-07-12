@@ -19,6 +19,22 @@ export const taskListSlice = createSlice({
                 taskContent: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex laboriosam nisi ab non quidem',
                 status: 'Pending',
             },
+            {
+                id: 3,
+                date: '01-01-2026',
+                employee: 'Nawaz Mia',
+                taskPriority: 'High',
+                taskContent: 'dupur 2tar moddhe kaj ses kore diba',
+                status: 'Pending',
+            },
+            {
+                id: 4,
+                date: '01-01-2026',
+                employee: 'Noyon',
+                taskPriority: 'Normal',
+                taskContent: 'notun project add hoyese kaj koro',
+                status: 'Pending',
+            },
         ],
     },
     reducers: {

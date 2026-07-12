@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveTab } from "../../app/features/tab/tabSlice";
+import { useState } from "react";
 
 const Aside = () => {
   const { tabs, activeTab } = useSelector((state) => state.tab);

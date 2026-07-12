@@ -16,6 +16,7 @@
     --color-white: #ffffff;
   }
 }
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   body,
