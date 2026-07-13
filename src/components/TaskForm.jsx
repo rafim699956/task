@@ -67,9 +67,9 @@ const TaskForm = () => {
   };
 
   return (
-    <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
+    <form className="space-y-4 lg:grid lg:grid-cols-2 gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
-        <label htmlFor="employee" className="text-white text-lg font-semibold">
+        <label htmlFor="employee">
           Select Employee <span className="text-red-500">*</span>
         </label>
         <select
@@ -92,7 +92,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="date" className="text-white text-lg font-semibold">
+        <label htmlFor="date">
           Date <span className="text-red-500">*</span>
         </label>
         <input
@@ -108,7 +108,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="taskPriority" className="text-white text-lg font-semibold">
+        <label htmlFor="taskPriority">
           Task taskPriority <span className="text-red-500">*</span>
         </label>
         <select
@@ -135,7 +135,7 @@ const TaskForm = () => {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="repeatTask"
-          className="text-white text-lg font-semibold"
+          className="text-white text-sm lg:text-lg font-semibold"
         >
           Repeat Task <span className="text-red-500">*</span>
         </label>
@@ -159,10 +159,7 @@ const TaskForm = () => {
       </div>
 
       <div className="flex flex-col gap-2 col-span-2">
-        <label
-          htmlFor="taskContent"
-          className="text-white text-lg font-semibold"
-        >
+        <label htmlFor="taskContent">
           Enter Task <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -178,7 +175,7 @@ const TaskForm = () => {
         )}
       </div>
 
-      <div className="col-span-2 flex gap-4">
+      <div className="lg:col-span-2 flex gap-4">
         <button
           type="submit"
           className="bg-[#008045] text-white py-2 px-6 text-base font-bold rounded cursor-pointer hover:bg-[#006635] transition-colors dark:bg-[#008045] dark:hover:bg-[#006635]"

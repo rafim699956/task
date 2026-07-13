@@ -3,11 +3,12 @@ import MainContent from "./components/MainContent";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../app/features/themeMode/themeSlice";
+import { toggleSidebar } from "../app/features/sidebar/sidebarSlice";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.isDarkMode);
+  const isOpenSidebar  = useSelector((state) => state.sidebar.isOpenSidebar);
   const dispatch = useDispatch();
-  console.log(darkMode);
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -17,7 +18,9 @@ const App = () => {
   }, [darkMode]);
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="p-6 bg-[#013214] flex items-center justify-end">
+      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-between lg:justify-end">
+       <button onClick={()=> dispatch(toggleSidebar())} className="p-1 rounded text-2xl text-white lg:hidden transition-all ease-linear duration-300">{isOpenSidebar ? '✖' : '☰'}</button>
+        
         {/*  */}
         <button
           onClick={() => dispatch(toggleTheme())}
@@ -32,7 +35,7 @@ const App = () => {
           />
         </button>
       </div>
-      <div className="flex grow overflow-hidden">
+      <div className="relative flex grow overflow-hidden">
         <Aside />
         <MainContent />
       </div>

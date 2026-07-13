@@ -10,39 +10,41 @@ const TaskList = () => {
           {tasks.length}
         </span>
       </p>
-      <table className="w-full text-center text-white border border-[#677483] overflow-x-auto bg-[#2A3B4D]">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Action ID</th>
-            <th>Employee</th>
-            <th>Task Priority</th>
-            <th>Task</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((task) => (
-            <tr key={task.id} className="border-t border-[#677483]">
-              <td>{task.date}</td>
-              <td>{task.employee}</td>
-              <td>{task.employee}</td>
-              <td>{task.taskPriority}</td>
-              <td>{task.taskContent}</td>
-              <td>{task.status}</td>
-              <td>
-                <button className="bg-green-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">
-                  Edit
-                </button>
-                <button className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer">
-                  Delete
-                </button>
-              </td>
+      <div className="w-full overflow-x-auto">
+        <table className="w-full text-center text-white border border-[#677483] overflow-x-auto bg-[#2A3B4D] dark:bg-black/40">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Action ID</th>
+              <th>Employee</th>
+              <th>Task Priority</th>
+              <th>Task</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task.id} className="border-t border-[#677483]">
+                <td>{task.date}</td>
+                <td>{task.employee}</td>
+                <td>{task.employee}</td>
+                <td>{task.taskPriority}</td>
+                <td>{task.taskContent}</td>
+                <td>{task.status}</td>
+                <td>
+                  <button className="bg-green-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">
+                    Edit
+                  </button>
+                  <button className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import taskPriorityReducer from './features/taskPriority/taskPrioritySlice.js'
 import repetTaskReducer from './features/repetTask/repetTaskSlice.js'
 import taskListReducer from './features/tasklist/tasklistSlice.js'
 import themeReducer from './features/themeMode/themeSlice.js'
+import sidebarReducer from './features/sidebar/sidebarSlice.js'
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         taskPriority: taskPriorityReducer,
         repetTask: repetTaskReducer,
         taskList: taskListReducer,
-        theme: themeReducer
+        theme: themeReducer,
+        sidebar: sidebarReducer,
     }
 })

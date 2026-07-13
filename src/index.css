@@ -29,16 +29,22 @@
   select,
   input,
   textarea {
-    @apply border border-[#8F98A8] p-2 rounded outline-none bg-[#090D26] placeholder:text-[#596176] text-[#596176];
+    @apply border border-[#8F98A8] p-2 rounded outline-none bg-[#090D26] placeholder:text-[#596176] text-[#596176] w-full max-w-full block;
   }
   option {
-    @apply text-white font-bold text-base;
+    @apply text-white font-bold text-xs lg:text-base;
   }
   textarea {
-    @apply resize-none;
+    @apply resize-none text-white;
+  }
+  th{
+    @apply font-bold;
   }
   th,
   td {
-    @apply text-nowrap p-2 border border-white;
+    @apply text-xs lg:text-base text-nowrap p-2 border border-white;
+  }
+  label{
+    @apply text-white text-sm lg:text-lg font-semibold;
   }
 }
