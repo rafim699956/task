@@ -45,7 +45,7 @@ const ManageTask = () => {
                 <td>{task.employee}</td>
                 <td>{task.employee}</td>
                 <td>{task.taskPriority}</td>
-                <td className="max-w-75 text-wrap sm:text-nowrap">{task.taskContent}</td>
+                <td className="max-w-75 sm:max-w-full text-wrap sm:text-nowrap">{task.taskContent}</td>
                 <td>{task.status}</td>
               </tr>
             ))}
