@@ -1,0 +1,8 @@
+{
+  "sidebar": {
+    "addTask": "Add Task",
+    "manageTask": "Manage Task",
+    "taskReport": "Task Report",
+    "settings": "Settings"
+  }
+}
