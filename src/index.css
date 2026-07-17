@@ -21,7 +21,7 @@
 @layer base {
   body,
   html {
-    @apply w-full h-full bg-[#161E2B] dark:bg-white overflow-hidden;
+    @apply w-full h-full bg-[#161E2B] dark:bg-black overflow-hidden;
   }
   #root {
     @apply w-full h-full overflow-hidden;

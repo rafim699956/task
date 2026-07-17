@@ -33,7 +33,7 @@ const TaskList = () => {
                 <td>{task.employee}</td>
                 <td>{task.employee}</td>
                 <td>{task.taskPriority}</td>
-                <td>{task.taskContent}</td>
+                <td className="max-w-75 text-wrap sm:text-nowrap">{task.taskContent}</td>
                 <td>{task.status}</td>
                 <td>
                   <button className="bg-green-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">

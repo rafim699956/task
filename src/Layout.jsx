@@ -57,7 +57,7 @@ const Layout = () => {
         >
           <span
             className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-300 ${
-              darkMode ? "-translate-x-7" : "translate-x-1"
+              !darkMode ? "-translate-x-7" : "translate-x-1"
             }`}
           />
         </button>
