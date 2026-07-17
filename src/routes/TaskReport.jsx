@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
-const TaskReportTabContent = () => {
-  const { tasks } = useSelector((state) => state.taskList);
+const TaskReport = () => {
+    const { tasks } = useSelector((state) => state.taskList);
   return (
     <div className="h-full">
       <div className="flex flex-col gap-4 p-2 border border-gray-50 rounded-md w-1/4 h-full">
@@ -31,7 +31,7 @@ const TaskReportTabContent = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TaskReportTabContent;
+export default TaskReport

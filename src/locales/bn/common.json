@@ -1,8 +1,31 @@
 {
   "sidebar": {
-    "addTask": "টাস্ক যোগ করুন",
-    "manageTask": "টাস্ক পরিচালনা করুন",
-    "taskReport": "টাস্ক রিপোর্ট",
-    "settings": "সেটিংস"
+    "Task": "টাস্ক",
+    "AddTask": "টাস্ক যোগ করুন",
+    "ManageTask": "টাস্ক পরিচালনা করুন",
+    "TaskReport": "টাস্ক রিপোর্ট",
+    "Settings": "সেটিংস"
+  },
+  "form": {
+    "AddTask": "টাস্ক যুক্ত করুন",
+    "SelectEmployee": "কর্মচারী নির্বাচন করুন",
+    "Date": "তারিখ",
+    "TaskPriority": "টাস্কের অগ্রাধিকার",
+    "RepeatTask": "টাস্ক পুনরাবৃত্তি করুন",
+    "EnterTask": "টাস্ক লিখুন",
+    "Submit": "জমা দিন"
+  },
+  "table": {
+    "TaskList": "টাস্ক তালিকা",
+    "Date": "তারিখ",
+    "ActionId": "অ্যাকশন আইডি",
+    "Employee": "কর্মচারী",
+    "TaskPriority": "টাস্কের অগ্রাধিকার",
+    "Task": "টাস্ক",
+    "Status": "স্ট্যাটাস",
+    "Action": "অ্যাকশন",
+    "Todays": "আজকের",
+    "ThisMonth": "এই মাস",
+    "AllTime": "সর্বকালের"
   }
 }

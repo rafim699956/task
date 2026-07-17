@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const tabSlice = createSlice({
     name: 'tab',
     initialState: {
-        tabs: ["Add Task", "Manage Task", "Task Report", "Settings"],
-        activeTab: "Add Task"
+        tabs: ["AddTask", "ManageTask", "TaskReport", "Settings"],
+        activeTab: "AddTask"
     },
     reducers: {
         setActiveTab(state, action) {

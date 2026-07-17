@@ -1,8 +1,31 @@
 {
   "sidebar": {
-    "addTask": "Add Task",
-    "manageTask": "Manage Task",
-    "taskReport": "Task Report",
-    "settings": "Settings"
+    "Task": "Task",
+    "AddTask": "Add Task",
+    "ManageTask": "Manage Task",
+    "TaskReport": "Task Report",
+    "Settings": "Settings"
+  },
+  "form": {
+    "AddTask": "Add Task",
+    "SelectEmployee": "Select Employee",
+    "Date": "Date",
+    "TaskPriority": "Task Priority",
+    "RepeatTask": "Repeat Task",
+    "EnterTask": "Enter Task",
+    "Submit": "Submit"
+  },
+  "table": {
+    "TaskList": "Task List",
+    "Date": "Date",
+    "ActionId": "Action Id",
+    "Employee": "Employee",
+    "TaskPriority": "Task Priority",
+    "Task": "Task",
+    "Status": "Status",
+    "Action": "Action",
+    "Todays": "Todays",
+    "ThisMonth": "This Month",
+    "AllTime": "All Time"
   }
 }

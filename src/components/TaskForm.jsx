@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTask } from "../../app/features/tasklist/tasklistSlice";
+import { useTranslation } from "react-i18next";
 
 const TaskForm = () => {
+  const { t } = useTranslation();
   const { employees } = useSelector((state) => state.employee);
   const taskPriorities = useSelector((state) => state.taskPriority);
   const repetTasks = useSelector((state) => state.repetTask);
@@ -46,10 +48,10 @@ const TaskForm = () => {
       newErrors.taskPriority = "Please select a taskPriority";
     }
     if (!formData.repeatTask) {
-      newErrors.repeatTask = "Please select a repeat task";
+      newErrors.repeatTask = "Please select a RepeatTask";
     }
     if (!formData.taskContent.trim()) {
-      newErrors.taskContent = "Please enter task taskContent";
+      newErrors.taskContent = "Please EnterTask taskContent";
     }
 
     setErrors(newErrors);
@@ -67,10 +69,14 @@ const TaskForm = () => {
   };
 
   return (
-    <form className="space-y-4 lg:grid lg:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+    <form
+      className="space-y-4 lg:grid lg:grid-cols-2 gap-4"
+      onSubmit={handleSubmit}
+    >
       <div className="flex flex-col gap-2">
         <label htmlFor="employee">
-          Select Employee <span className="text-red-500">*</span>
+          {t("form.SelectEmployee")}
+          <span className="text-red-500">*</span>
         </label>
         <select
           id="employee"
@@ -79,7 +85,7 @@ const TaskForm = () => {
           onChange={handleChange}
           className={`border ${errors.employee ? "border-red-500" : "border-gray-300"} rounded p-2`}
         >
-          <option value="">Select Employee</option>
+          <option value="">SelectEmployee</option>
           {employees.map((employee) => (
             <option key={employee} value={employee}>
               {employee}
@@ -93,7 +99,7 @@ const TaskForm = () => {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="date">
-          Date <span className="text-red-500">*</span>
+          {t("form.Date")} <span className="text-red-500">*</span>
         </label>
         <input
           type="date"
@@ -109,7 +115,8 @@ const TaskForm = () => {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="taskPriority">
-          Task taskPriority <span className="text-red-500">*</span>
+          {t("form.TaskPriority")}
+          <span className="text-red-500">*</span>
         </label>
         <select
           id="taskPriority"
@@ -119,7 +126,7 @@ const TaskForm = () => {
           className={`border ${errors.taskPriority ? "border-red-500" : "border-gray-300"} rounded p-2`}
         >
           <option value="">
-            Select taskPriority ({taskPriorities.join(", ")})
+            Select TaskPriority ({taskPriorities.join(", ")})
           </option>
           {taskPriorities.map((taskPriority) => (
             <option key={taskPriority} value={taskPriority}>
@@ -137,7 +144,8 @@ const TaskForm = () => {
           htmlFor="repeatTask"
           className="text-white text-sm lg:text-lg font-semibold"
         >
-          Repeat Task <span className="text-red-500">*</span>
+          {t("form.RepeatTask")}
+          <span className="text-red-500">*</span>
         </label>
         <select
           id="repeatTask"
@@ -160,14 +168,15 @@ const TaskForm = () => {
 
       <div className="flex flex-col gap-2 col-span-2">
         <label htmlFor="taskContent">
-          Enter Task <span className="text-red-500">*</span>
+          {t("form.EnterTask")}
+          <span className="text-red-500">*</span>
         </label>
         <textarea
           id="taskContent"
           name="taskContent"
           value={formData.taskContent}
           onChange={handleChange}
-          placeholder="Enter Task"
+          placeholder="EnterTask"
           className={`border ${errors.taskContent ? "border-red-500" : "border-gray-300"} rounded p-2 min-h-25`}
         />
         {errors.taskContent && (
@@ -180,7 +189,7 @@ const TaskForm = () => {
           type="submit"
           className="bg-[#008045] text-white py-2 px-6 text-base font-bold rounded cursor-pointer hover:bg-[#006635] transition-colors dark:bg-[#008045] dark:hover:bg-[#006635]"
         >
-          Paid
+          {t("form.Submit")}
         </button>
       </div>
     </form>

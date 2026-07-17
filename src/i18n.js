@@ -7,22 +7,22 @@ import bn from "./locales/bn/common.json";
 i18n
 .use(initReactI18next)
 .init({
-    resources: {
-        en: {
-            translation: en,
-        },
-        bn: {
-            translation: bn,
-        },
+  resources: {
+    en: {
+      translation: en,
     },
-
-    lng: "en",
-
-    fallbackLng: "en",
-
-    interpolation: {
-        escapeValue: false,
+    bn: {
+      translation: bn,
     },
+  },
+
+  lng: "en",
+
+  fallbackLng: "en",
+
+  interpolation: {
+    escapeValue: false,
+  },
 });
 
 export default i18n;

@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
-
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 const ManageTask = () => {
-  const { activeTab } = useSelector((state) => state.tab);
+  const { pathname } = useLocation();
+  const { t } = useTranslation();
   return (
     <div className="bg-[#C6D9E7] p-1 flex justify-between items-center">
-      <h2 className="text-2xl text-[#00040D] font-bold">{activeTab}</h2>
-      {activeTab === "Add Task" && (
+      <h2 className="text-2xl text-[#00040D] font-bold">{pathname}</h2>
+      {pathname === "/" && (
         <button className="bg-[#017F48] py-1 px-6 text-white font-semibold text-base rounded cursor-pointer">
-          Add Task
+          {t("sidebar.AddTask")}
         </button>
       )}
     </div>
