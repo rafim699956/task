@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-const ManageTask = () => {
+const ContentHeader = () => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
   return (
@@ -19,4 +19,4 @@ const ManageTask = () => {
   );
 };
 
-export default ManageTask;
+export default ContentHeader;
