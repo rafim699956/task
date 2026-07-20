@@ -1,11 +1,23 @@
 import { useEffect } from "react";
+import { Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../app/features/sidebar/sidebarSlice";
 import { toggleTheme } from "../app/features/themeMode/themeSlice";
 import { changeLanguage } from "../app/features/language/languageSlice";
-import Aside from './components/Aside'
-import MainContent from './components/MainContent'
+import Aside from "./components/Aside";
+import MainContent from "./components/MainContent";
+import { RxHamburgerMenu } from "react-icons/rx";
+import ReactCountryFlag from "react-country-flag";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { IoIosClose } from "react-icons/io";
+import { FaAngleDown } from "react-icons/fa";
 const Layout = () => {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -23,43 +35,55 @@ const Layout = () => {
     }
   }, [darkMode]);
 
+  const language = i18n.language;
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-between lg:justify-between">
+      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-end gap-4">
         <div className="flex items-center gap-1">
-          <button
-            className="text-sm lg:text-base text-white cursor-pointer"
-            onClick={() => handleLanguage("en")}
-          >
-            En
-          </button>
-          <span className="text-sm lg:text-base text-white">/</span>
-          <button
-            className="text-sm lg:text-base text-white cursor-pointer"
-            onClick={() => handleLanguage("bn")}
-          >
-            bn
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-2 text-white text-lg lg:text-xl">
+                <ReactCountryFlag
+                  countryCode={language === "en" ? "US" : "BD"}
+                  svg
+                  className="size-6"
+                />
+                {language.toUpperCase()}
+                <FaAngleDown />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={() => handleLanguage("en")}>
+                  <ReactCountryFlag countryCode="US" svg className="size-6" />
+                  EN
+                </DropdownMenuItem>
+
+                <DropdownMenuItem onClick={() => handleLanguage("bn")}>
+                  <ReactCountryFlag countryCode="BD" svg className="size-6" />
+                  বাংলা
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
+
         <button
           onClick={() => dispatch(toggleSidebar())}
           className="p-1 rounded text-2xl text-white lg:hidden transition-all ease-linear duration-300"
         >
-          {isOpenSidebar ? "✖" : "☰"}
+          {isOpenSidebar ? (
+            <IoIosClose className="text-2xl size-6" />
+          ) : (
+            <RxHamburgerMenu className="text-2xl size-6" />
+          )}
         </button>
 
-        {/*  */}
         <button
           onClick={() => dispatch(toggleTheme())}
-          className={`relative h-8 w-14 rounded-full transition-colors duration-300 ${
-            darkMode ? "bg-black/60" : "bg-gray-300"
-          }`}
+          className="rounded-md p-2 hover:bg-accent"
         >
-          <span
-            className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-300 ${
-              !darkMode ? "-translate-x-7" : "translate-x-1"
-            }`}
-          />
+          {toggleTheme ? <Sun size={20} /> : <Moon size={20} />}
         </button>
       </div>
       <div className="relative flex grow overflow-hidden">
