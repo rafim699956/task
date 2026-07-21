@@ -49,7 +49,7 @@ export const taskListSlice = createSlice({
         updateTask(state, action) {
             const index = state.tasks.findIndex((task) => task.id === action.payload.id);
             if (index !== -1) {
-                state.tasks[index] = action.payload; 
+                state.tasks[index] = { ...action.payload, status: 'Pending', };
             }
         }
     }
