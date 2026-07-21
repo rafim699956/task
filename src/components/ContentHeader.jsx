@@ -1,7 +1,10 @@
+import { openAddPopup } from "../../app/features/popup/popupSlice";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 const ContentHeader = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   return (
     <div className="bg-[#C6D9E7] p-1 flex justify-between items-center">
@@ -11,7 +14,10 @@ const ContentHeader = () => {
           : t("sidebar.ManageTask")}
       </h2>
       {pathname === "/" && (
-        <button className="bg-[#017F48] py-1 px-6 text-white font-semibold text-sm lg:text-base rounded cursor-pointer">
+        <button
+          onClick={() => dispatch(openAddPopup())}
+          className="bg-[#017F48] py-1 px-6 text-white font-semibold text-sm lg:text-base rounded cursor-pointer"
+        >
           {t("sidebar.AddTask")}
         </button>
       )}

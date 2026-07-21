@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { openEditPopup } from "../../app/features/popup/popupSlice";
 
 const TaskList = () => {
   const { tasks } = useSelector((state) => state.taskList);
   const { t } = useTranslation();
+  const dispatch =  useDispatch();
   return (
     <div>
       <p className="py-2 px-10 rounded rounded-br-none rounded-bl-none bg-[#013214] inline-block text-white font-bold border-2 border-[#14776E] relative">
@@ -36,7 +38,7 @@ const TaskList = () => {
                 <td className="max-w-75 sm:max-w-full text-wrap sm:text-nowrap">{task.taskContent}</td>
                 <td>{task.status}</td>
                 <td>
-                  <button className="bg-green-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">
+                  <button onClick={()=>dispatch(openEditPopup(task))} className="bg-green-500 text-white px-2 py-1 rounded mr-2 cursor-pointer">
                     Edit
                   </button>
                   <button className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer">

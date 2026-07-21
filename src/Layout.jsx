@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IoIosClose } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa";
+import TaskForm from "./components/TaskForm";
 const Layout = () => {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -89,6 +90,7 @@ const Layout = () => {
       <div className="relative flex grow overflow-hidden">
         <Aside />
         <MainContent />
+        <TaskForm />
       </div>
     </div>
   );
