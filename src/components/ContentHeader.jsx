@@ -2,6 +2,7 @@ import { openAddPopup } from "../../app/features/popup/popupSlice";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router";
+import { Button } from "./ui/button";
 const ContentHeader = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -14,12 +15,11 @@ const ContentHeader = () => {
           : t("sidebar.ManageTask")}
       </h2>
       {pathname === "/" && (
-        <button
+        <Button
+          size="sm"
           onClick={() => dispatch(openAddPopup())}
-          className="bg-[#017F48] py-1 px-6 text-white font-semibold text-sm lg:text-base rounded cursor-pointer"
-        >
-          {t("sidebar.AddTask")}
-        </button>
+          className="bg-[#017F48] py-4 px-5 text-white font-semibold text-sm lg:text-base rounded cursor-pointer"
+        >{t("sidebar.AddTask")}</Button>
       )}
     </div>
   );
