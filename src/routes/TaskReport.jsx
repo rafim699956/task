@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTask } from "../../app/features/tasklist/tasklistSlice";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select.jsx";
+import { Textarea } from "../components/ui/textarea.jsx";
 const TaskReport = () => {
   const { tasks } = useSelector((state) => state.taskList);
   const taskPriorities = useSelector((state) => state.taskPriority);
@@ -93,7 +102,9 @@ const TaskReport = () => {
                   </span>
                 </div>
 
-                <p className="text-xs md:text-base text-white/40 line-clamp-1">{task.taskContent}</p>
+                <p className="text-xs md:text-base text-white/40 line-clamp-1">
+                  {task.taskContent}
+                </p>
               </div>
             </div>
           ))}
@@ -222,22 +233,39 @@ const TaskReport = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <select
-                    id="taskPriority"
-                    name="taskPriority"
+                  <Select
+                    items={taskPriorities}
                     value={formData.taskPriority}
-                    onChange={handleChange}
-                    className={`border ${errors.taskPriority ? "border-red-500" : "border-gray-300"} rounded p-2`}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        taskPriority: value,
+                      }))
+                    }
                   >
-                    <option value="">
-                      Select TaskPriority ({taskPriorities.join(", ")})
-                    </option>
-                    {taskPriorities.map((taskPriority) => (
-                      <option key={taskPriority} value={taskPriority}>
-                        {taskPriority}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger
+                      className={`bg-[#1E293B] text-white border w-full ${
+                        errors.taskPriority
+                          ? "border-red-500"
+                          : "border-gray-500"
+                      } rounded p-2 focus:outline-none focus:border-blue-500`}
+                    >
+                      <SelectValue placeholder="Select Priority" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {taskPriorities.map((priority) => (
+                          <SelectItem
+                            key={priority}
+                            value={priority}
+                            className="text-black text-base font-semibold p-1"
+                          >
+                            {priority}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                   {errors.taskPriority && (
                     <p className="text-red-500 text-sm">
                       {errors.taskPriority}
@@ -246,20 +274,37 @@ const TaskReport = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <select
-                    id="repeatTask"
-                    name="repeatTask"
+                  <Select
+                    items={repetTasks}
                     value={formData.repeatTask}
-                    onChange={handleChange}
-                    className={`border ${errors.repeatTask ? "border-red-500" : "border-gray-300"} rounded p-2`}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        repeatTask: value,
+                      }))
+                    }
                   >
-                    <option value="">Select ({repetTasks.join(", ")})</option>
-                    {repetTasks.map((task) => (
-                      <option key={task} value={task}>
-                        {task}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger
+                      className={`bg-[#1E293B] text-white border w-full ${
+                        errors.repeatTask ? "border-red-500" : "border-gray-500"
+                      } rounded p-2 focus:outline-none focus:border-blue-500`}
+                    >
+                      <SelectValue placeholder="Select Frequency" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {repetTasks.map((repetTask) => (
+                          <SelectItem
+                            key={repetTask}
+                            value={repetTask}
+                            className="text-black text-base font-semibold p-1"
+                          >
+                            {repetTask}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                   {errors.repeatTask && (
                     <p className="text-red-500 text-sm">{errors.repeatTask}</p>
                   )}
@@ -267,13 +312,18 @@ const TaskReport = () => {
               </div>
               <div className="flex items-center gap-2 md:gap-3">
                 <div className="flex flex-col gap-2 col-span-2 grow">
-                  <textarea
-                    id="taskContent"
-                    name="taskContent"
+                  <Textarea
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        taskContent: value,
+                      }))
+                    }
                     value={formData.taskContent}
-                    onChange={handleChange}
-                    placeholder="EnterTask"
-                    className={`border ${errors.taskContent ? "border-red-500" : "border-gray-300"} rounded p-2 min-h-8`}
+                    placeholder="Enter task details..."
+                    className={`bg-[#1E293B] text-white border ${
+                      errors.taskContent ? "border-red-500" : "border-gray-500"
+                    } rounded p-2 min-h-25 focus:outline-none focus:border-blue-500`}
                   />
                   {errors.taskContent && (
                     <p className="text-red-500 text-sm">{errors.taskContent}</p>

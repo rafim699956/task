@@ -10,6 +10,7 @@ import { useDispatch} from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Button } from "./button";
 import { openEditPopup } from "../../../app/features/popup/popupSlice.js";
+import { deleteTask } from "../../../app/features/tasklist/tasklistSlice.js";
 
 const ListTable = ({ tasks = [], action = false }) => {
   const { t } = useTranslation();
@@ -75,6 +76,7 @@ const ListTable = ({ tasks = [], action = false }) => {
                   size="sm"
                   variant="destructive"
                   className="text-white bg-red-400 hover:bg-red-700"
+                  onClick={()=>dispatch(deleteTask(task.id))}
                 >
                   Delete
                 </Button>
