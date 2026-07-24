@@ -13,7 +13,14 @@
     "TaskPriority": "Task Priority",
     "RepeatTask": "Repeat Task",
     "EnterTask": "Enter Task",
-    "Submit": "Submit"
+    "Submit": "Submit",
+    "error": {
+      "employee": "Please select an employee",
+      "date": "Please select a date",
+      "priority": "Please select a task priority",
+      "repeat": "Please select repeat task frequency",
+      "content": "Please enter task content"
+    }
   },
   "table": {
     "TaskList": "Task List",

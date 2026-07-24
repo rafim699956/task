@@ -17,7 +17,7 @@ import {
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { CalendarIcon } from "lucide-react";
-import { addDays, format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Field, FieldLabel } from "./ui/field";
@@ -32,10 +32,6 @@ const TaskForm = () => {
   const mode = useSelector((state) => state.popup.mode);
   const selectedTask = useSelector((state) => state.popup.selectedTask);
   const dispatch = useDispatch();
-  const[date, setDate] =useState (      {
-        from: new Date(new Date().getFullYear(), 0, 20),
-        to: addDays(new Date(new Date().getFullYear(), 0, 20), 20),
-      });
 
   const emptyForm = {
     employee: "",
@@ -45,6 +41,7 @@ const TaskForm = () => {
     taskContent: "",
   };
 
+  const [date, setDate] = useState(undefined);
   const [formData, setFormData] = useState(emptyForm);
   const [errors, setErrors] = useState({});
 
@@ -72,8 +69,19 @@ const TaskForm = () => {
         repeatTask: selectedTask.repeatTask || selectedTask.repeat || "",
         taskContent: selectedTask.taskContent || "",
       });
+
+      if (formattedDate) {
+        const parsedDate = parseISO(formattedDate);
+        if (!isNaN(parsedDate)) {
+          setDate({
+            from: parsedDate,
+            to: parsedDate,
+          });
+        }
+      }
     } else {
       setFormData(emptyForm);
+      setDate(undefined);
     }
 
     if (!popup) {
@@ -81,19 +89,29 @@ const TaskForm = () => {
     }
   }, [mode, selectedTask, popup]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // Helper to handle field updates and clear errors dynamically
+  const updateField = (field, value) => {
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [field]: value,
     }));
 
-    if (errors[name]) {
+    if (errors[field]) {
       setErrors((prev) => ({
         ...prev,
-        [name]: "",
+        [field]: "",
       }));
     }
+  };
+
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+
+    const formattedDateString = selectedDate?.from
+      ? format(selectedDate.from, "yyyy-MM-dd")
+      : "";
+
+    updateField("date", formattedDateString);
   };
 
   const validateForm = () => {
@@ -118,6 +136,7 @@ const TaskForm = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -128,9 +147,8 @@ const TaskForm = () => {
         dispatch(addNewTask(formData));
       }
       setFormData(emptyForm);
+      setDate(undefined);
       dispatch(closePopup());
-    } else {
-      console.log("Validation errors:", errors);
     }
   };
 
@@ -173,31 +191,27 @@ const TaskForm = () => {
             className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 gap-4 text-white"
             onSubmit={handleSubmit}
           >
+            {/* Employee Selection */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="employee" className="text-sm font-medium">
-                {t("form.SelectEmployee")}{" "}
+                {t("form.SelectEmployee")}
                 <span className="text-red-400">*</span>
               </label>
               <Select
                 items={employees}
                 value={formData.employee}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    employee: value,
-                  }))
-                }
+                onValueChange={(value) => updateField("employee", value)}
               >
                 <SelectTrigger
                   className={`bg-[#1E293B] text-white border w-full ${
                     errors.employee ? "border-red-500" : "border-gray-500"
                   } rounded p-2 focus:outline-none focus:border-blue-500`}
                 >
-                  <SelectValue placeholder="Select Employee" />
+                  <SelectValue placeholder={t("form.SelectEmployee")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {employees.map((employee) => (
+                    {employees?.map((employee) => (
                       <SelectItem
                         key={employee}
                         value={employee}
@@ -210,27 +224,17 @@ const TaskForm = () => {
                 </SelectContent>
               </Select>
               {errors.employee && (
-                <p className="text-red-400 text-xs">{errors.employee}</p>
+                <p className="text-red-400 text-xs">{t("form.error.employee")}</p>
               )}
             </div>
 
+            {/* Date Range Picker */}
             <div className="flex flex-col gap-1.5">
-              {/* <label htmlFor="date" className="text-sm font-medium">
-                {t("form.Date")} <span className="text-red-400">*</span>
-              </label> */}
-              {/* <input
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                className={`bg-[#1E293B] text-white border ${
-                  errors.date ? "border-red-500" : "border-gray-500"
-                } rounded p-2 focus:outline-none focus:border-blue-500`}
-              /> */}
               <Field>
-                <FieldLabel htmlFor="date-picker-range" className="text-sm font-medium">
+                <FieldLabel
+                  htmlFor="date-picker-range"
+                  className="text-sm font-medium"
+                >
                   {t("form.Date")} <span className="text-red-400">*</span>
                 </FieldLabel>
                 <Popover>
@@ -239,11 +243,13 @@ const TaskForm = () => {
                       <Button
                         variant="outline"
                         id="date-picker-range"
-                        className="justify-start px-2.5 font-normal"
+                        className={`justify-start px-2.5 font-normal bg-[#1E293B] ${
+                          errors.date ? "border-red-500" : "border-gray-500"
+                        } rounded p-2 focus:outline-none focus:border-blue-500`}
                       >
                         <CalendarIcon data-icon="inline-start" />
                         {date?.from ? (
-                          date.to ? (
+                          date.to && date.to !== date.from ? (
                             <>
                               {format(date.from, "LLL dd, y")} -{" "}
                               {format(date.to, "LLL dd, y")}
@@ -252,7 +258,7 @@ const TaskForm = () => {
                             format(date.from, "LLL dd, y")
                           )
                         ) : (
-                          <span>Pick a date</span>
+                          <span>{t("form.Date")}</span>
                         )}
                       </Button>
                     }
@@ -262,17 +268,18 @@ const TaskForm = () => {
                       mode="range"
                       defaultMonth={date?.from}
                       selected={date}
-                      onSelect={setDate}
+                      onSelect={handleDateChange}
                       numberOfMonths={2}
                     />
                   </PopoverContent>
                 </Popover>
               </Field>
               {errors.date && (
-                <p className="text-red-400 text-xs">{errors.date}</p>
+                <p className="text-red-400 text-xs">{t("form.error.date")}</p>
               )}
             </div>
 
+            {/* Task Priority */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="taskPriority" className="text-sm font-medium">
                 {t("form.TaskPriority")} <span className="text-red-400">*</span>
@@ -280,23 +287,18 @@ const TaskForm = () => {
               <Select
                 items={taskPriorities}
                 value={formData.taskPriority}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    taskPriority: value,
-                  }))
-                }
+                onValueChange={(value) => updateField("taskPriority", value)}
               >
                 <SelectTrigger
                   className={`bg-[#1E293B] text-white border w-full ${
                     errors.taskPriority ? "border-red-500" : "border-gray-500"
                   } rounded p-2 focus:outline-none focus:border-blue-500`}
                 >
-                  <SelectValue placeholder="Select Priority" />
+                  <SelectValue placeholder={t("form.TaskPriority")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {taskPriorities.map((priority) => (
+                    {taskPriorities?.map((priority) => (
                       <SelectItem
                         key={priority}
                         value={priority}
@@ -309,10 +311,11 @@ const TaskForm = () => {
                 </SelectContent>
               </Select>
               {errors.taskPriority && (
-                <p className="text-red-400 text-xs">{errors.taskPriority}</p>
+                <p className="text-red-400 text-xs">{t("form.error.priority")}</p>
               )}
             </div>
 
+            {/* Repeat Task */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="repeatTask" className="text-sm font-medium">
                 {t("form.RepeatTask")} <span className="text-red-400">*</span>
@@ -320,23 +323,18 @@ const TaskForm = () => {
               <Select
                 items={repetTasks}
                 value={formData.repeatTask}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    repeatTask: value,
-                  }))
-                }
+                onValueChange={(value) => updateField("repeatTask", value)}
               >
                 <SelectTrigger
                   className={`bg-[#1E293B] text-white border w-full ${
                     errors.repeatTask ? "border-red-500" : "border-gray-500"
                   } rounded p-2 focus:outline-none focus:border-blue-500`}
                 >
-                  <SelectValue placeholder="Select Frequency" />
+                  <SelectValue placeholder={t("form.RepeatTask")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {repetTasks.map((repetTask) => (
+                    {repetTasks?.map((repetTask) => (
                       <SelectItem
                         key={repetTask}
                         value={repetTask}
@@ -349,32 +347,29 @@ const TaskForm = () => {
                 </SelectContent>
               </Select>
               {errors.repeatTask && (
-                <p className="text-red-400 text-xs">{errors.repeatTask}</p>
+                <p className="text-red-400 text-xs">{t("form.error.repeat")}</p>
               )}
             </div>
 
+            {/* Task Content */}
             <div className="flex flex-col gap-1.5 lg:col-span-2">
               <label htmlFor="taskContent" className="text-sm font-medium">
                 {t("form.EnterTask")} <span className="text-red-400">*</span>
               </label>
               <Textarea
-                onValueChange={(value) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    taskContent: value,
-                  }))
-                }
+                onChange={(e) => updateField("taskContent", e.target.value)}
                 value={formData.taskContent}
-                placeholder="Enter task details..."
+                placeholder={t("form.EnterTask")}
                 className={`bg-[#1E293B] text-white border ${
                   errors.taskContent ? "border-red-500" : "border-gray-500"
                 } rounded p-2 min-h-25 focus:outline-none focus:border-blue-500`}
               />
               {errors.taskContent && (
-                <p className="text-red-400 text-xs">{errors.taskContent}</p>
+                <p className="text-red-400 text-xs">{t("form.error.content")}</p>
               )}
             </div>
 
+            {/* Submit Button */}
             <div className="lg:col-span-2 flex justify-end pt-2">
               <button
                 type="submit"

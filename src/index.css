@@ -24,10 +24,10 @@
 @layer base {
   body,
   html {
-    @apply w-full h-full bg-[#161E2B] dark:bg-black overflow-hidden;
+    @apply bg-[#161E2B] dark:bg-black overflow-hidden;
   }
   #root {
-    @apply w-full h-full overflow-hidden;
+    @apply w-svw h-svh overflow-hidden;
   }
   select,
   input,

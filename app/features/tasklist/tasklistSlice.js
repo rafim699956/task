@@ -5,40 +5,40 @@ export const taskListSlice = createSlice({
         tasks: [
             {
                 id: 1,
-                date: '01-01-2026',
+                date: '2026-01-01',
                 employee: 'Nowaz Mia',
                 taskPriority: 'High',
-                taskContent: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex laboriosam nisi ab non quidem',
+                taskContent: 'Review and update the Q1 project roadmap deliverables and align with the core team.',
                 status: 'Pending',
                 repeatTask: "Yes"
             },
             {
                 id: 2,
-                date: '01-01-2026',
+                date: '2026-01-02',
                 employee: 'Noyon',
                 taskPriority: 'Normal',
-                taskContent: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex laboriosam nisi ab non quidem',
+                taskContent: 'Perform routine database maintenance and create backup copies of the server logs.',
                 status: 'Pending',
                 repeatTask: "Yes"
             },
             {
                 id: 3,
-                date: '01-01-2026',
+                date: '2026-01-03',
                 employee: 'Nowaz Mia',
                 taskPriority: 'High',
-                taskContent: 'dupur 2tar moddhe kaj ses kore diba',
+                taskContent: 'Fix critical high-priority UI issues on the client dashboard before 2:00 PM today.',
                 status: 'Pending',
                 repeatTask: "Yes"
             },
             {
                 id: 4,
-                date: '01-01-2026',
+                date: '2026-01-04',
                 employee: 'Noyon',
                 taskPriority: 'Normal',
-                taskContent: 'notun project add hoyese kaj koro',
+                taskContent: 'Setup repository and start working on the initial layout for the new project module.',
                 status: 'Pending',
                 repeatTask: "Yes"
-            },
+            }
         ],
     },
     reducers: {

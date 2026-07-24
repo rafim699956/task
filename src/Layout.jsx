@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { MdSunny } from "react-icons/md";
+import { IoMoon } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../app/features/sidebar/sidebarSlice";
@@ -38,37 +39,8 @@ const Layout = () => {
 
   const language = i18n.language;
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-end gap-4">
-        <div className="flex items-center gap-1">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="flex items-center gap-2 text-white text-lg lg:text-xl">
-                <ReactCountryFlag
-                  countryCode={language === "en" ? "US" : "BD"}
-                  svg
-                  className="size-6"
-                />
-                {language.toUpperCase()}
-                <FaAngleDown />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuGroup>
-                <DropdownMenuItem onClick={() => handleLanguage("en")}>
-                  <ReactCountryFlag countryCode="US" svg className="size-6" />
-                  EN
-                </DropdownMenuItem>
-
-                <DropdownMenuItem onClick={() => handleLanguage("bn")}>
-                  <ReactCountryFlag countryCode="BD" svg className="size-6" />
-                  বাংলা
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
+    <div className="w-full h-full flex flex-col">
+      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-between gap-4">
         <button
           onClick={() => dispatch(toggleSidebar())}
           className="p-1 rounded text-2xl text-white lg:hidden transition-all ease-linear duration-300"
@@ -79,13 +51,43 @@ const Layout = () => {
             <RxHamburgerMenu className="text-2xl size-6" />
           )}
         </button>
+        <div className="flex items-center gap-2"> 
+          <div className="flex items-center gap-1">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center gap-2 text-white text-lg lg:text-xl">
+                  <ReactCountryFlag
+                    countryCode={language === "en" ? "US" : "BD"}
+                    svg
+                    className="size-6"
+                  />
+                  {language.toUpperCase()}
+                  <FaAngleDown />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={() => handleLanguage("en")}>
+                    <ReactCountryFlag countryCode="US" svg className="size-6" />
+                    EN
+                  </DropdownMenuItem>
 
-        <button
-          onClick={() => dispatch(toggleTheme())}
-          className="rounded-md p-2 hover:bg-accent"
-        >
-          {toggleTheme ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
+                  <DropdownMenuItem onClick={() => handleLanguage("bn")}>
+                    <ReactCountryFlag countryCode="BD" svg className="size-6" />
+                    বাংলা
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <button
+            onClick={() => dispatch(toggleTheme())}
+            className="rounded-md p-2 hover:bg-accent"
+          >
+            {!darkMode ? <MdSunny className="text-xl text-white" /> : <IoMoon className="text-xl text-black/80" />}
+          </button>
+        </div>
       </div>
       <div className="relative flex grow overflow-hidden">
         <Aside />
