@@ -110,9 +110,7 @@ const TaskReport = () => {
 
   return (
     <div className="h-full flex">
-      {/* Left Sidebar - Always visible with icons only on mobile, full on desktop */}
       <div className="flex flex-col gap-4 p-1 sm:p-2 sm:border border-gray-50 rounded-md w-16 md:w-1/4 h-full overflow-hidden">
-        {/* Search - Hidden on mobile, visible on desktop */}
         <input
           className="border-0 rounded-md sm:p-2 bg-[#556370] text-white text-base font-semibold placeholder:text-white hidden md:block"
           type="text"
@@ -122,12 +120,10 @@ const TaskReport = () => {
           <div className="flex flex-col gap-4 overflow-y-auto items-center md:items-stretch">
             {tasks.map((task) => (
               <div key={task.id} className="flex items-center gap-2 md:gap-3">
-                {/* Icon/Avatar - Always visible */}
                 <div className="shrink-0 size-8 md:size-10 bg-[#FF00FA] rounded-full flex items-center justify-center text-white font-bold text-xs md:text-base">
                   {task.employee?.charAt(0) || "U"}
                 </div>
 
-                {/* Content - Hidden on mobile, visible on desktop */}
                 <div className="flex-1 min-w-0 hidden md:block">
                   <div className="grid grid-cols-[1fr_auto_auto] items-center gap-2">
                     <h2 className="text-white font-bold text-sm md:text-lg truncate">
@@ -150,9 +146,7 @@ const TaskReport = () => {
         </ScrollArea>
       </div>
 
-      {/* Right Content */}
       <div className="grow flex flex-col min-w-0">
-        {/* Stats Cards */}
         <div className="grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2 px-2 md:px-4 hidden sm:grid">
           <div className="border border-[#20283A] bg-[#090D26] p-2 md:p-3 rounded-lg flex flex-col md:flex-row gap-2 lg:gap-4">
             <div className="bg-white rounded border size-10 lg:size-20 shrink-0 self-center overflow-hidden">
@@ -249,7 +243,6 @@ const TaskReport = () => {
           </div>
         </div>
 
-        {/* Task List */}
         <ScrollArea className="flex-1 min-h-0 px-2 md:px-5 py-2">
           <div className="space-y-3">
             <div className="bg-[#293C4B] rounded-lg p-3 space-y-3">
@@ -263,11 +256,11 @@ const TaskReport = () => {
               </div>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                 <div className="space-y-1">
-                  <p className="text-sm lg:text-base font-semibold text-white break-words">
+                  <p className="text-sm lg:text-base font-semibold text-white wrap-break-words">
                     Dupur 5 Tar Vitore 25 box beriany complete korte hobe dupur
                     5 tar vitore 25
                   </p>
-                  <p className="text-sm lg:text-base font-semibold text-white break-words">
+                  <p className="text-sm lg:text-base font-semibold text-white wrap-break-words">
                     Dupur 5 Tar Vitore 25 box beriany complete korte hobe dupur
                     5 tar vitore 25
                   </p>
@@ -293,11 +286,11 @@ const TaskReport = () => {
               </div>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                 <div className="space-y-1">
-                  <p className="text-sm lg:text-base font-semibold text-white break-words">
+                  <p className="text-sm lg:text-base font-semibold text-white wrap-break-word">
                     Dupur 5 Tar Vitore 25 box beriany complete korte hobe dupur
                     5 tar vitore 25
                   </p>
-                  <p className="text-sm lg:text-base font-semibold text-white break-words">
+                  <p className="text-sm lg:text-base font-semibold text-white wrap-break-word">
                     Dupur 5 Tar Vitore 25 box beriany complete korte hobe dupur
                     5 tar vitore 25
                   </p>
@@ -315,7 +308,6 @@ const TaskReport = () => {
           </div>
         </ScrollArea>
 
-        {/* Form Section */}
         <div className="py-3 md:py-4 px-2 md:px-3 border-t border-[#183B4D] bg-[#0D2239]">
           <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3">

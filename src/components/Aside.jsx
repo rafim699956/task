@@ -43,7 +43,6 @@ const Aside = () => {
         {t("sidebar.Task")}
       </h3>
 
-      {/* ScrollArea - Proper height with flex-1 and overflow handling */}
       <ScrollArea className="flex-1 min-h-0">
         <ul className="pl-2">
           {menus.map((menu) => (
