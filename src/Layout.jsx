@@ -40,7 +40,7 @@ const Layout = () => {
   const language = i18n.language;
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-between gap-4">
+      <div className="p-3 md:p-4 lg:p-6 bg-[#013214] flex items-center justify-between lg:justify-end gap-4">
         <button
           onClick={() => dispatch(toggleSidebar())}
           className="p-1 rounded text-2xl text-white lg:hidden transition-all ease-linear duration-300"
@@ -83,7 +83,7 @@ const Layout = () => {
 
           <button
             onClick={() => dispatch(toggleTheme())}
-            className="rounded-md p-2 hover:bg-accent"
+            className="rounded-md p-2"
           >
             {!darkMode ? <MdSunny className="text-xl text-white" /> : <IoMoon className="text-xl text-black/80" />}
           </button>

@@ -202,7 +202,7 @@ const TaskReport = () => {
           </div>
         </div>
         <div>
-          <div className="border border-[#20283A] bg-[#090D26] p-2 md:p-3 rounded-lg flex justify-between gap-1">
+          <div className="border border-[#20283A] bg-[#090D26] p-2 md:p-3 rounded-lg flex justify-between gap-1 lg:hidden">
             <div className="bg-white rounded-full border size-10 lg:size-20 shrink-0 self-center overflow-hidden">
               <img
                 src="https://picsum.photos/id/237/200/300"
@@ -244,7 +244,7 @@ const TaskReport = () => {
         </div>
 
         <ScrollArea className="flex-1 min-h-0 px-2 md:px-5 py-2">
-          <div className="space-y-3">
+          <div className="flex flex-col justify-end gap-4 h-full">
             <div className="bg-[#293C4B] rounded-lg p-3 space-y-3">
               <div className="flex items-center gap-4">
                 <p className="bg-[#476673] py-1 px-2 rounded-3xl text-white font-semibold text-xs lg:text-base">
